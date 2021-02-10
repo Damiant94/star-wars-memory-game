@@ -117,7 +117,7 @@ class Game extends Component {
                 <h1>stAr wArs</h1>
                 <h2>memory gAme</h2>
                 <div className={classes.cardsWrapper}>
-                    {this.state.remaining === 0 ? <div className={classes.winInfo}>you win</div> : cards}
+                    {this.state.remaining === 0 ? <div className={classes.winInfo}>YOU WIN</div> : cards}
                 </div>
                 <div className={classes.movesCounter}>Moves counter: {this.state.movesCounter}</div>
                 <button disabled={this.state.newGameBtnDisabled} onClick={this.startNewGame} className={classes.newGameBtn}>restart</button>

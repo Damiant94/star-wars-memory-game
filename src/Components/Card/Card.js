@@ -6,6 +6,7 @@ class Card extends Component {
         super(props);
         this.card = createRef();
     }
+    
     render() {
         return (
             <div 
