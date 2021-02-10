@@ -20,7 +20,12 @@ let icons = [
     "boba.png",
     "vader.png",
     // "kenobi.png",
-    // "r2d2.png"
+    // "r2d2.png",
+    // "deathstar.png",
+    // "millenium.png",
+    // "trooper.png",
+    // "babyyoda.png",
+    // "tie.png"
 ];
 
 icons = icons.concat(icons);
@@ -92,19 +97,20 @@ class Game extends Component {
         const cards = icons.map((icon, index) => {
             return (
                 <Card 
-                icon={icon} 
-                key={index}
-                clicked={this.cardClickHandler}/>
+                    icon={icon} 
+                    key={index}
+                    clicked={this.cardClickHandler}/>
             );
         });
 
         return(
             <div className={classes.Game}>
+                <h1>stAr wArs</h1>
+                <h2>memory gAme</h2>
                 <div className={classes.cardsWrapper}>
-                    {cards}
+                    {this.state.remaining === 0 ? <div className={classes.winInfo}>you won</div> : cards}
                 </div>
                 <button disabled={this.state.newGameBtnDisabled} onClick={this.startNewGame} className={classes.newGameBtn}>New Game</button>
-                {this.state.remaining === 0 ? <div className={classes.winInfo}>WIN</div> : null}
             </div>
         );
     }
