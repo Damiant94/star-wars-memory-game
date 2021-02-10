@@ -31,8 +31,7 @@ class Game extends Component {
     state = {
         remaining: icons.length / 2,
         clickedOnce: false,
-        currentCard: null,
-        win: false
+        currentCard: null
     };
 
     cardClickHandler = (card) => {
@@ -54,7 +53,6 @@ class Game extends Component {
                     setTimeout(() => {
                         card.classList.remove(classesCard.visible);
                         this.state.currentCard.classList.remove(classesCard.visible);
-                        const cards = document.querySelectorAll(`.${classesCard.Card}`);
                         for (const card of cards) {
                             card.style.pointerEvents = "";
                         }
@@ -78,6 +76,7 @@ class Game extends Component {
         for (const card of activeCards) {
             card.classList.remove(classesCard.visible);
         }
+        this.setState({remaining: icons.length / 2});
     };
 
     render() {
@@ -93,9 +92,11 @@ class Game extends Component {
 
         return(
             <div className={classes.Game}>
-                {cards}
-                <button onClick={this.startNewGame}>New Game</button>
-                {this.state.remaining === 0 ? <div>WIN</div> : null}
+                <div className={classes.cardsWrapper}>
+                    {cards}
+                </div>
+                <button onClick={this.startNewGame} className={classes.newGameBtn}>New Game</button>
+                {this.state.remaining === 0 ? <div className={classes.winInfo}>WIN</div> : null}
             </div>
         );
     }

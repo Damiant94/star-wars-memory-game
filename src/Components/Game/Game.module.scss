@@ -1,6 +1,22 @@
 .Game {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
-    padding: 100px;
+    align-items: center;
+
+    .cardsWrapper {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 100px;
+    }
+
+    .newGameBtn{
+        font-size: 2rem;
+    }
+
+    .winInfo {
+        margin: 20px;
+        font-size: 10rem;
+    }
 }
