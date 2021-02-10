@@ -19,8 +19,8 @@ function shuffle(a) {
 let icons = [
     "boba.png",
     "vader.png",
-    "kenobi.png",
-    "r2d2.png"
+    // "kenobi.png",
+    // "r2d2.png"
 ];
 
 icons = icons.concat(icons);
@@ -31,7 +31,8 @@ class Game extends Component {
     state = {
         remaining: icons.length / 2,
         clickedOnce: false,
-        currentCard: null
+        currentCard: null,
+        newGameBtnDisabled: false
     };
 
     cardClickHandler = (card) => {
@@ -50,12 +51,14 @@ class Game extends Component {
                     for (const card of cards) {
                         card.style.pointerEvents = "none";
                     }
+                    this.setState({newGameBtnDisabled: true});
                     setTimeout(() => {
                         card.classList.remove(classesCard.visible);
                         this.state.currentCard.classList.remove(classesCard.visible);
                         for (const card of cards) {
                             card.style.pointerEvents = "";
                         }
+                        this.setState({newGameBtnDisabled: false});
                     }, 1000);
                 } else {
                     this.setState((prevState) => {
@@ -76,7 +79,12 @@ class Game extends Component {
         for (const card of activeCards) {
             card.classList.remove(classesCard.visible);
         }
-        this.setState({remaining: icons.length / 2});
+        this.setState({
+            remaining: icons.length / 2,
+            clickedOnce: false,
+            currentCard: null,
+            newGameBtnDisabled: false
+        });
     };
 
     render() {
@@ -95,7 +103,7 @@ class Game extends Component {
                 <div className={classes.cardsWrapper}>
                     {cards}
                 </div>
-                <button onClick={this.startNewGame} className={classes.newGameBtn}>New Game</button>
+                <button disabled={this.state.newGameBtnDisabled} onClick={this.startNewGame} className={classes.newGameBtn}>New Game</button>
                 {this.state.remaining === 0 ? <div className={classes.winInfo}>WIN</div> : null}
             </div>
         );
