@@ -29,9 +29,10 @@ shuffle(icons);
 class Game extends Component {
 
     state = {
-        remaining: icons.length,
+        remaining: icons.length / 2,
         clickedOnce: false,
-        currentCard: null
+        currentCard: null,
+        win: false
     };
 
     cardClickHandler = (card) => {
@@ -46,17 +47,41 @@ class Game extends Component {
             } else {
                 card.classList.add(classesCard.visible);
                 if (card.dataset.icon !== this.state.currentCard.dataset.icon) {
+                    const cards = document.querySelectorAll(`.${classesCard.Card}`);
+                    for (const card of cards) {
+                        card.style.pointerEvents = "none";
+                    }
                     setTimeout(() => {
                         card.classList.remove(classesCard.visible);
                         this.state.currentCard.classList.remove(classesCard.visible);
+                        const cards = document.querySelectorAll(`.${classesCard.Card}`);
+                        for (const card of cards) {
+                            card.style.pointerEvents = "";
+                        }
                     }, 1000);
+                } else {
+                    this.setState((prevState) => {
+                        return (
+                            {
+                                remaining: prevState.remaining - 1
+                            }
+                        )
+                    });
                 }
             }
         });
+    };
 
+    startNewGame = () => {
+        shuffle(icons);
+        const activeCards = document.querySelectorAll(`.${classesCard.visible}`)
+        for (const card of activeCards) {
+            card.classList.remove(classesCard.visible);
+        }
     };
 
     render() {
+        console.log(this.state.remaining);
         const cards = icons.map((icon, index) => {
             return (
                 <Card 
@@ -69,6 +94,8 @@ class Game extends Component {
         return(
             <div className={classes.Game}>
                 {cards}
+                <button onClick={this.startNewGame}>New Game</button>
+                {this.state.remaining === 0 ? <div>WIN</div> : null}
             </div>
         );
     }
