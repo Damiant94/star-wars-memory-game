@@ -19,13 +19,13 @@ function shuffle(a) {
 let icons = [
     "boba.png",
     "vader.png",
-    // "kenobi.png",
-    // "r2d2.png",
-    // "deathstar.png",
-    // "millenium.png",
-    // "trooper.png",
-    // "babyyoda.png",
-    // "tie.png"
+    "kenobi.png",
+    "r2d2.png",
+    "deathstar.png",
+    "millenium.png",
+    "trooper.png",
+    "babyyoda.png",
+    "tie.png"
 ];
 
 icons = icons.concat(icons);
@@ -37,7 +37,8 @@ class Game extends Component {
         remaining: icons.length / 2,
         clickedOnce: false,
         currentCard: null,
-        newGameBtnDisabled: false
+        newGameBtnDisabled: false,
+        movesCounter: 0
     };
 
     cardClickHandler = (card) => {
@@ -50,30 +51,36 @@ class Game extends Component {
                 card.classList.add(classesCard.visible);
                 this.setState({currentCard: card});
             } else {
-                card.classList.add(classesCard.visible);
-                if (card.dataset.icon !== this.state.currentCard.dataset.icon) {
-                    const cards = document.querySelectorAll(`.${classesCard.Card}`);
-                    for (const card of cards) {
-                        card.style.pointerEvents = "none";
-                    }
-                    this.setState({newGameBtnDisabled: true});
-                    setTimeout(() => {
-                        card.classList.remove(classesCard.visible);
-                        this.state.currentCard.classList.remove(classesCard.visible);
-                        for (const card of cards) {
-                            card.style.pointerEvents = "";
-                        }
-                        this.setState({newGameBtnDisabled: false});
-                    }, 1000);
-                } else {
-                    this.setState((prevState) => {
-                        return (
-                            {
-                                remaining: prevState.remaining - 1
-                            }
-                        )
+                this.setState((prevState) => {
+                    return ({
+                        movesCounter: prevState.movesCounter + 1
                     });
-                }
+                }, () => {
+                    card.classList.add(classesCard.visible);
+                    if (card.dataset.icon !== this.state.currentCard.dataset.icon) {
+                        const cards = document.querySelectorAll(`.${classesCard.Card}`);
+                        for (const card of cards) {
+                            card.style.pointerEvents = "none";
+                        }
+                        this.setState({newGameBtnDisabled: true});
+                        setTimeout(() => {
+                            card.classList.remove(classesCard.visible);
+                            this.state.currentCard.classList.remove(classesCard.visible);
+                            for (const card of cards) {
+                                card.style.pointerEvents = "";
+                            }
+                            this.setState({newGameBtnDisabled: false});
+                        }, 1000);
+                    } else {
+                        this.setState((prevState) => {
+                            return (
+                                {
+                                    remaining: prevState.remaining - 1
+                                }
+                            )
+                        });
+                    }
+                });
             }
         });
     };
@@ -84,16 +91,18 @@ class Game extends Component {
         for (const card of activeCards) {
             card.classList.remove(classesCard.visible);
         }
-        this.setState({
-            remaining: icons.length / 2,
-            clickedOnce: false,
-            currentCard: null,
-            newGameBtnDisabled: false
-        });
+        setTimeout(() => {
+            this.setState({
+                remaining: icons.length / 2,
+                clickedOnce: false,
+                currentCard: null,
+                newGameBtnDisabled: false,
+                movesCounter: 0
+            });
+        }, 300);
     };
 
     render() {
-        console.log(this.state.remaining);
         const cards = icons.map((icon, index) => {
             return (
                 <Card 
@@ -108,9 +117,10 @@ class Game extends Component {
                 <h1>stAr wArs</h1>
                 <h2>memory gAme</h2>
                 <div className={classes.cardsWrapper}>
-                    {this.state.remaining === 0 ? <div className={classes.winInfo}>you won</div> : cards}
+                    {this.state.remaining === 0 ? <div className={classes.winInfo}>you win</div> : cards}
                 </div>
-                <button disabled={this.state.newGameBtnDisabled} onClick={this.startNewGame} className={classes.newGameBtn}>New Game</button>
+                <div className={classes.movesCounter}>Moves counter: {this.state.movesCounter}</div>
+                <button disabled={this.state.newGameBtnDisabled} onClick={this.startNewGame} className={classes.newGameBtn}>restart</button>
             </div>
         );
     }

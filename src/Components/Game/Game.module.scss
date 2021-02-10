@@ -6,6 +6,7 @@
     }
 
 .Game {
+    user-select: none;
     font-family: 'Mandalore Regular';
     font-size: 42px;
     display: flex;
@@ -14,6 +15,7 @@
     align-items: center;
     min-height: 100vh;
     padding: 100px;
+    color: #bbb;
 
     h1, h2 {
         color: #ddd;
@@ -28,7 +30,7 @@
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        padding: 100px;
+        padding: 100px 0;
     }
 
     .newGameBtn {
@@ -37,6 +39,7 @@
         font-size: 1.5rem;
         border: none;
         padding: 20px;
+        margin-top: 20px;
         border-radius: 10px;
         background-color: #333;
         box-shadow: 0px 0px 2px white;
@@ -48,12 +51,21 @@
         &:hover {
             background-color: #444;
         }
+
+        &:disabled {
+            pointer-events: none;
+        }
+
+        &:active {
+            background-color: #333;
+        }
     }
 
     .winInfo {
         margin: 20px;
-        font-size: 140px;
+        font-size: 120px;
         text-align: center;
-        color: #bbb;
+        color: #525e64;
     }
+
 }

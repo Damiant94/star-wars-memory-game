@@ -9,11 +9,18 @@ class Card extends Component {
     render() {
         return (
             <div 
-                className={classes.Card} 
-                data-icon={this.props.icon} 
+                className={classes.Card}
                 ref={this.card}
+                data-icon={this.props.icon}
                 onClick={() => this.props.clicked(this.card.current)}>
-                <img src={'icons/' + this.props.icon}/>
+                <div className={classes.inner}>
+                    <div className={classes.front}>
+                        <img src={'icons/' + this.props.icon} alt="front icon"/>
+                    </div>
+                    <div className={classes.back}>
+                        <img src={'icons/empire.svg'} alt="back icon"/>
+                    </div>
+                </div>
             </div>
         );
     }
