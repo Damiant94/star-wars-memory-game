@@ -1,0 +1,52 @@
+.Card {
+    width: 128px;
+    height: 128px;
+    perspective: 1000px;
+    margin: 10px;
+
+    .inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: all 0.3s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        border-radius: 10px;
+
+        .front, .back {
+            background-color: #222;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: all 0s ease 0.1s;
+        }
+
+        .front {
+            transform: rotateY(180deg);
+        }
+    }
+
+    img {
+        width: 128px;
+        height: 128px;
+        transition: opacity 0.2s ease-in-out;
+        pointer-events: none;
+    }
+
+    &:hover {
+        img {
+            opacity: 0.8;
+        }
+    }
+
+    &.visible {
+        pointer-events: none;
+        .back {
+            opacity: 0;
+        }
+        .inner {
+            transform: rotateY(180deg);
+        }
+    }
+}

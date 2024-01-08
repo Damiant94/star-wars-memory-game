@@ -1,0 +1,82 @@
+@font-face {
+    font-family: 'Mandalore Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Mandalore Regular'), url('../utils/fonts/mandalore.woff') format('woff');
+}
+
+.Game {
+    background-color: #222;
+    user-select: none;
+    font-family: 'Mandalore Regular';
+    font-size: 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0 100px;
+    color: #bbb;
+
+    h1, h2 {
+        color: #ddd;
+        text-align: center;
+    }
+
+    h2 {
+        font-size: 50px;
+    }
+
+    .cardsWrapper {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 100px 0;
+        max-width: 1000px;
+    }
+
+    .movesCounter {
+        text-align: center;
+    }
+
+    .newGameBtn {
+        font-family: 'Mandalore Regular';
+        font-size: 42px;
+        font-size: 1.5rem;
+        border: none;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 10px;
+        background-color: #333;
+        box-shadow: 0px 0px 2px white;
+        color: #bbb;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: #444;
+        }
+
+        &:disabled {
+            pointer-events: none;
+        }
+
+        &:active {
+            background-color: #333;
+        }
+    }
+
+    .winInfo {
+        margin: 20px;
+        font-size: 120px;
+        text-align: center;
+        color: #525e64;
+    }
+}
+
+@media (max-width: 650px) {
+    .Game {
+        padding: 100px 0;
+    }
+}
