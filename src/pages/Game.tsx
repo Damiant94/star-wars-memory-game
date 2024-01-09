@@ -17,15 +17,22 @@ let shuffle = (a: string[]) => {
 }
 
 let icons = [
-    "boba.png",
-    "vader.png",
-    "kenobi.png",
-    "r2d2.png",
-    "deathstar.png",
-    "millenium.png",
-    "trooper.png",
+    "atat.png",
     "babyyoda.png",
-    "tie.png"
+    "boba.png",
+    "c3po",
+    "darthmaul",
+    "deathstar.png",
+    "jango",
+    "kenobi.png",
+    "maul",
+    "millenium.png",
+    "quigon",
+    "r2d2.png",
+    "tie.png",
+    "trooper.png",
+    "vader.png",
+    "yoda.png"
 ];
 
 icons = icons.concat(icons);
