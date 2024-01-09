@@ -23,7 +23,7 @@ let icons = [
     "c3po.png",
     "darthmaul.png",
     "deathstar.png",
-    "jango.png",
+    // "jango.png",
     "kenobi.png",
     "maul.png",
     "millenium.png",
